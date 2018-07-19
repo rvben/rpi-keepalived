@@ -37,9 +37,9 @@ RUN apk --no-cache add \
        openssl && \
        adduser keepalived_script --disabled-password
 COPY --from=builder /usr/local/sbin/keepalived /usr/local/sbin/keepalived
-COPY keepalived.conf /etc/keepalived/keepalived.conf
-COPY notify.sh /notify.sh
-COPY entrypoint.sh /entrypoint.sh
+COPY assets/keepalived.conf /etc/keepalived/keepalived.conf
+COPY assets/notify.sh /notify.sh
+COPY assets/entrypoint.sh /entrypoint.sh
 
 ENV INTERFACE="eth0"
 ENV STATE="BACKUP"
