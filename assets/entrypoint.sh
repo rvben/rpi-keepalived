@@ -16,18 +16,18 @@ then
     sed -i "s|{{ NOTIFY }}|notify \"$NOTIFY\"|g" $CONFIG
     chmod +x $NOTIFY
   else
-    sed -i "|{{ NOTIFY }}|d" $CONFIG
+    sed -i "/{{ NOTIFY }}/d" $CONFIG
   fi
 
   for peer in $UNICAST_PEERS; do
     sed -i "s|{{ UNICAST_PEERS }}|${peer}\n    {{ UNICAST_PEERS }}|g" $CONFIG
   done
-  sed -i "|{{ UNICAST_PEERS }}|d" $CONFIG
+  sed -i "/{{ UNICAST_PEERS }}/d" $CONFIG
 
   for vip in $VIRTUAL_IPS; do
     sed -i "s|{{ VIRTUAL_IPS }}|${vip}\n    {{ VIRTUAL_IPS }}|g" $CONFIG
   done
-  sed -i "|{{ VIRTUAL_IPS }}|d" $CONFIG
+  sed -i "/{{ VIRTUAL_IPS }}/d" $CONFIG
 fi
 
 exec /usr/local/sbin/keepalived -f $CONFIG --dont-fork --log-console ${ARGUMENTS}
