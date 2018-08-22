@@ -8,6 +8,7 @@ env:
   - DOCKER_USER=rvben
   - secure: TMdEbWpROrPudzfuYSEuSSmiLHWCdUwwspZiUoef33eIfQQBbbVbd4Zke1PjuqSqnoKdnN5Nx164rnP01yxIxgCcf3n6FeP+w3sUAAsWJVWrqAQezPa9jnLruJa4tiFJ+gseBqdaGzWDiMwGEp9QNWpowzU6vT5arLb19VTDvC2BgKTLfBG8pv1iHKgyZQM2KGvBfIor4XIVpWubqxurgYTZhAfWqLx5hPN8RB5XobuN+g5DE/zkq6orUD1GKEEcvJ7XobXFzTAyoIYbQd2vgBYNIpzUsq7K1VmrFyhVlkavczVxrJGw6ik5eLn+qWBQ4d06+HZM/X6PdjDzzGB+UgWqXRWPb9a5IXM3xNZyKyBVszzf6BPtkx3t3uX90J7yQA20RL1YXCFVt4stxK8Y4V7s+vFk2IfBhoZ3oQv3EqJQH/JTmuD7arjxuE8k6QsvD+i7GtJMffD+ST5TJsOjXoe72o+OWfdPpWUtHiwglfCCqzeUlB/rbV9oFTVOKv3rLO5QN6eK0q4mkX+lsSLfnQaDcEUt5ifie5Urt4yde8fn8a/wmXvP1yA18Cz3q5SIiCFHYE+oqD2OvRWWIlp6CJqpTLYr78yVDTEiLN8GtsNcy803CjJ/dMtCpfCu/drXY3Z3otA3qCoeuxfSmdNUOePJJo8OZIGVEkH+83EJa8k=
 script:
+- make test
 - VERSION=$(cat Dockerfile | grep -oP 'KEEPALIVED_VERSION=(.*)' | grep -oP '\d.\d.\d')
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 - docker build -t $DOCKER_NAME .

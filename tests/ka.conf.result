@@ -1,0 +1,29 @@
+global_defs {
+  enable_script_security
+}
+
+vrrp_instance VI {
+  state BACKUP
+  interface eth0
+  virtual_router_id 41
+  priority 100
+
+  nopreempt
+
+  unicast_peer {
+    192.168.2.101
+    192.168.2.102
+    192.168.2.103
+  }
+
+  authentication {
+    auth_type PASS
+    auth_pass KeptAliv
+  }
+
+  virtual_ipaddress {
+    192.168.2.100/24
+  }
+
+  notify "/tmp/notify.sh"
+}
