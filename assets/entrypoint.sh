@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-CONFIG=/etc/keepalived/keepalived.conf
+CONFIG=${CONFIG:-/etc/keepalived/keepalived.conf}
 
 if grep -q '{{' $CONFIG
 then
@@ -13,7 +13,7 @@ then
 
 
   if [ -n "$NOTIFY" ]; then
-    sed -i "s|{{ NOTIFY }}|notify \"$NOTIFY\"|g" $CONFIG
+    sed -i "s|{{ NOTIFY }}|\"$NOTIFY\"|g" $CONFIG
     chmod +x $NOTIFY
   else
     sed -i "/{{ NOTIFY }}/d" $CONFIG

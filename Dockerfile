@@ -1,7 +1,7 @@
 FROM multiarch/alpine:armhf-latest-stable AS builder
 LABEL maintainer "Ruben Jongejan - ruben.jongejan@gmail.com"
 
-ARG KEEPALIVED_VERSION=2.0.5
+ARG KEEPALIVED_VERSION=2.0.6
 
 RUN apk --no-cache add \
        autoconf \
@@ -35,7 +35,7 @@ RUN apk --no-cache add \
        libnl3 \
        libgcc \
        openssl && \
-       adduser keepalived_script --disabled-password
+       adduser keepalived_script -D
 COPY --from=builder /usr/local/sbin/keepalived /usr/local/sbin/keepalived
 COPY assets/keepalived.conf /etc/keepalived/keepalived.conf
 COPY assets/notify.sh /notify.sh
