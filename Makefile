@@ -1,4 +1,4 @@
-.PHONY: build test
+.PHONY: build test dgoss
 DOCKER_USER = rvben
 DOCKER_NAME = rvben/rpi-keepalived
 
@@ -9,3 +9,7 @@ build:
 
 test:
 	bash tests/verify_entrypoint.sh
+
+dgoss:
+	which dgoss || curl -fsSL https://goss.rocks/install | sh
+	dgoss run $(DOCKER_NAME):latest

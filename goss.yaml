@@ -1,0 +1,29 @@
+file:
+  /entrypoint.sh:
+    exists: true
+    mode: "0666"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /etc/keepalived/keepalived.conf:
+    exists: true
+    mode: "0666"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /notify.sh:
+    exists: true
+    mode: "0777"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /usr/local/sbin/keepalived:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
