@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+IP=$(ifconfig ${INTERFACE} | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
 CONFIG=${CONFIG:-/etc/keepalived/keepalived.conf}
 
 if grep -q '{{' $CONFIG
@@ -20,7 +21,9 @@ then
   fi
 
   for peer in $UNICAST_PEERS; do
-    sed -i "s|{{ UNICAST_PEERS }}|${peer}\n    {{ UNICAST_PEERS }}|g" $CONFIG
+    if [ "$peer" != "$IP" ]; then
+      sed -i "s|{{ UNICAST_PEERS }}|${peer}\n    {{ UNICAST_PEERS }}|g" $CONFIG
+    fi
   done
   sed -i "/{{ UNICAST_PEERS }}/d" $CONFIG
 
